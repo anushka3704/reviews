@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews Page</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="review-schema.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- Photo Modal -->
+  <div id="photo-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <span class="modal-close" id="modal-close">&times;</span>
+    <img class="modal-img" id="modal-img" alt="Review photo">
+  </div>
+
+  <div class="review-section">
+    <h2>Customer Reviews</h2>
+    <div class="slider-wrapper">
+
+      <button class="slider-btn prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div id="reviews-container"></div>
+
+      <button class="slider-btn next" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    // Slider arrows (desktop)
+    const container = document.getElementById('reviews-container');
+    document.querySelector('.slider-btn.next').addEventListener('click', () => {
+      container.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    document.querySelector('.slider-btn.prev').addEventListener('click', () => {
+      container.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+
+    // Photo modal
+    const photoModal   = document.getElementById('photo-modal');
+    const modalImg     = document.getElementById('modal-img');
+    const modalClose   = document.getElementById('modal-close');
+    const modalOverlay = document.getElementById('modal-overlay');
+
+    function openModal(src) {
+      modalImg.src = src;
+      photoModal.classList.add('active');
+    }
+
+    function closeModal() {
+      photoModal.classList.remove('active');
+      modalImg.src = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+
+    // Delegated click — works for dynamically rendered photos
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('review-photo')) {
+        openModal(e.target.src);
+      }
+    });
+  </script>
+</body>
+</html>
