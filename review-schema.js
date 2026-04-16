@@ -8,9 +8,9 @@ class ReviewSchemaManager {
     if (!this.container) return;
 
     this.firebaseConfig = {
-      apiKey: "AIzaSyAsLfnCKng68q5ZzM7sCxNGoXN6sHc9i7o",
-      authDomain: "top-products-and-collections.firebaseapp.com",
-      projectId: "top-products-and-collections"
+      apiKey: "",
+      authDomain: "",
+      projectId: ""
     };
 
     this.app = initializeApp(this.firebaseConfig);
